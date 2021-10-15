@@ -20,7 +20,7 @@ import { FormControl } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import { KeyboardDateTimePicker } from '@material-ui/pickers';
-import {  
+import { MedicalRecordInterface ,
         LabresultInterface,
         LabRoomInterface,
         LabTypeInterface,
