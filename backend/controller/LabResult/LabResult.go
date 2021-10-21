@@ -4,11 +4,10 @@ import (
 	"net/http"
 	"github.com/MoriMokata/project/backend/entity"
 	"github.com/gin-gonic/gin"
-)
+) 
 
 // POST /LabResult
 func CreateLabResult(c *gin.Context) {
-
 	var MedicalTech entity.MedicalTech
 	var MedicalRecord entity.MedicalRecord
 	var LabType entity.LabType
@@ -23,24 +22,24 @@ func CreateLabResult(c *gin.Context) {
 
 	// 10: ค้นหา MedicalTech ด้วย id
 	if tx := entity.DB().Where("id = ?", LabResult.MedicalTechID).First(&MedicalTech); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "video not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "MedicalTech not found"})
 		return
 	}
 
 	// 11: ค้นหา MedicalRecord ด้วย id
 	if tx := entity.DB().Where("id = ?", LabResult.MedicalRecordID).First(&MedicalRecord); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "resolution not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "MedicalRecord not found"})
 		return
 	}
 
 	// 12: ค้นหา LabType ด้วย id
 	if tx := entity.DB().Where("id = ?", LabResult.LabTypeID).First(&LabType); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "playlist not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "LabType not found"})
 		return
 	}
 	//13: ค้นหา LabRoom ด้วย id
 	if tx := entity.DB().Where("id = ?", LabResult.LabRoomID).First(&LabRoom); tx.RowsAffected == 0 {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "playlist not found"})
+		c.JSON(http.StatusBadRequest, gin.H{"error": "LabRoom not found"})
 		return
 	}
 	// 14: สร้าง LabResult

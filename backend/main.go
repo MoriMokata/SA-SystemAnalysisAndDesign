@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/MoriMokata/project/backend/controller"
+	"github.com/MoriMokata/project/backend/controller/LabResult"
 	"github.com/MoriMokata/project/backend/entity"
 	"github.com/gin-gonic/gin"
 )

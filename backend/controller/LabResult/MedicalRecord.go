@@ -1,5 +1,4 @@
 package controller
-
 import (
 	"net/http"
 	"github.com/MoriMokata/project/backend/entity"
