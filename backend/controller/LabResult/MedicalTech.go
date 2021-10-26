@@ -13,10 +13,9 @@ import (
 // GET /MedicalTech/:id
 
 func GetMedicalTech(c *gin.Context) {
-
 	var user entity.MedicalTech
-
-	if err := entity.DB().Table("medical_teches").Where("email = ?", "boss@gmail.com").First(&user).Error; err != nil {
+	id := c.Param("id")
+	if err := entity.DB().Raw("SELECT * FROM medical_teches WHERE id = ?", id).Scan(&user).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}

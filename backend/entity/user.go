@@ -22,6 +22,7 @@ type MedicalRecord struct{
 	Patient_Dob		time.Time
 	Patient_Tel		string
 	Register_Date 	time.Time
+	
 	LabResults []LabResult `gorm:"foreignKey:MedicalRecordID"`
 }
 
@@ -43,19 +44,19 @@ type LabResult struct{
 	gorm.Model
 	
 	MedicalTechID *uint
-	MedicalTech		MedicalTech
+	MedicalTech		MedicalTech  
 
 	MedicalRecordID *uint
-	MedicalRecord	MedicalRecord
+	MedicalRecord	MedicalRecord 
 
 	LabTypeID	*uint
-	LabType	LabType
+	LabType	LabType 
 
 	Lab_Result	string
 	Lab_Detail	string
 
 	LabRoomID	*uint
-	LabRoom	LabRoom
+	LabRoom	LabRoom 
 
 	AddedTime	time.Time
 }

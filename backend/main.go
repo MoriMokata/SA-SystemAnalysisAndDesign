@@ -3,7 +3,9 @@ package main
 import (
 	"github.com/MoriMokata/project/backend/controller/LabResult"
 	"github.com/MoriMokata/project/backend/entity"
+	"github.com/MoriMokata/project/backend/middlewares"
 	"github.com/gin-gonic/gin"
+	
 )
 
 func main() {
@@ -11,15 +13,20 @@ func main() {
 
 	r := gin.Default()
 	r.Use(CORSMiddleware())
+	api := r.Group("")
+	{
+		protected := api.Use(middlewares.Authorizes())
+		{
+			protected.GET("/api/MedicalTech/:id", controller.GetMedicalTech)
+			protected.GET("/api/MedicalRecord", controller.ListMedicalRecord)
+			protected.GET("/api/LabType", controller.ListLabType)
+			protected.GET("/api/LabRoom", controller.ListLabRoom)
+			protected.GET("/api/LabResult", controller.ListLabResult)
+			protected.POST("/api/submit", controller.CreateLabResult)	
 
-	// User Routes
-	r.GET("/api/MedicalTech", controller.GetMedicalTech)
-	r.GET("/api/MedicalRecord", controller.ListMedicalRecord)
-	r.GET("/api/LabType", controller.ListLabType)
-	r.GET("/api/LabRoom", controller.ListLabRoom)
-	r.GET("/api/LabResult", controller.ListLabResult)
-	r.POST("/api/submit", controller.CreateLabResult)
-	
+		}
+	}
+	r.POST("/api/login", controller.Login)
 	// Run the server
 
 	r.Run()

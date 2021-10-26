@@ -2,7 +2,7 @@ package entity
 
 import (
 	"time"
-
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -23,24 +23,27 @@ func SetupDatabase(){
 	)
 	db = database
 
+	Pass1, err := bcrypt.GenerateFromPassword([]byte("1"), 14)
+	Pass2, err := bcrypt.GenerateFromPassword([]byte("123"), 14)
+
 	MedicalTech1 := MedicalTech{
 		Name:	"Boss",
 		Email: "chalermkiet@gmail.com",
-		Pass: "asdf",
+		Pass: string(Pass1),
 	}
 	db.Model(&MedicalTech{}).Create(&MedicalTech1)
 
 	MedicalTech2 := MedicalTech{
 		Name:	"chalermkiet",
 		Email: 	"boss@gmail.com",
-		Pass: 	"sadf",
+		Pass: 	string(Pass2),
 	}
 	db.Model(&MedicalTech{}).Create(&MedicalTech2)
 
 	MedicalRecord1 := MedicalRecord{
 		Hospital_Number: "123",
 		Personal_ID:	"12341234",
-		Patient_Name:	"masdf",
+		Patient_Name:	"Somkiat kongkapan",
 		Patient_Age:	12,
 		Patient_Dob: time.Now(),
 		Patient_Tel:	"0382175",

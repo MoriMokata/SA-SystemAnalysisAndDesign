@@ -67,10 +67,13 @@ export default function Body() {
     
     const [MedicalTech, setMedicalTech] = useState<MedicalTechInterface>();
     const getMedicalTech = async() => {
-        const apiUrl = "http://localhost:8080/api/MedicalTech";
+        const uid = Number(localStorage.getItem("uid"));
+        const apiUrl = `http://localhost:8080/api/MedicalTech/${uid}`;
         const requestOptions = {
           method: "GET",
-          headers: {"Content-Type": "application/json"},
+          headers: { 
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",},
         }
         fetch(apiUrl, requestOptions)
           .then((response) => response.json())
@@ -91,7 +94,9 @@ export default function Body() {
         const apiUrl = "http://localhost:8080/api/MedicalRecord";
         const requestOptions = {
           method: "GET",
-          headers: {"Content-Type": "application/json"},
+          headers: { 
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",},
         }
     
         fetch(apiUrl, requestOptions)
@@ -111,7 +116,9 @@ export default function Body() {
           const apiUrl = "http://localhost:8080/api/LabRoom";
           const requestOptions = {
             method: "GET",
-            headers: {"Content-Type": "application/json"},
+            headers: { 
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+              "Content-Type": "application/json",},
           }
       
           fetch(apiUrl, requestOptions)
@@ -131,7 +138,9 @@ export default function Body() {
           const apiUrl = "http://localhost:8080/api/LabType";
           const requestOptions = {
             method: "GET",
-            headers: {"Content-Type": "application/json"},
+            headers: { 
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",},
           }
       
           fetch(apiUrl, requestOptions)
@@ -175,7 +184,9 @@ export default function Body() {
     const apiUrl = "http://localhost:8080/api/submit";
     const requestOptionsPost = {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",},
       body: JSON.stringify(data),
     };
 
