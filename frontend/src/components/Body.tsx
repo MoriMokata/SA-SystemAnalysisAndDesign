@@ -54,41 +54,18 @@ export default function Body() {
         getMedicalRecord();
         getLabRoom();
         getLabType();
-        getMedicalTech();
       }, []);
 
     const classes = useStyles();
     const [Labresult,setLabresult] = useState<Partial<LabresultInterface>>({});
+    const MedicalTech: MedicalTechInterface = (JSON.parse(localStorage.getItem("MedicalTech")|| ""));
 
     const  [AddedTime,setAddedTime] = useState<Date|null>(new Date());
     const handleAddedTime = (date: Date | null) => {
       setAddedTime(date);
     }
     
-    const [MedicalTech, setMedicalTech] = useState<MedicalTechInterface>();
-    const getMedicalTech = async() => {
-        const uid = Number(localStorage.getItem("uid"));
-        const apiUrl = `http://localhost:8080/api/MedicalTech/${uid}`;
-        const requestOptions = {
-          method: "GET",
-          headers: { 
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",},
-        }
-        fetch(apiUrl, requestOptions)
-          .then((response) => response.json())
-          .then((res) => {
-            console.log(res.data);
-            if(res.data) {
-              setMedicalTech(res.data)
-            } else {
-              console.log("else")
-            }
-          });
-      }
-
-
-
+    
     const [MedicalRecord, setMedicalRecord] = useState<MedicalRecordInterface[]>([]);
     const getMedicalRecord = async() => {
         const apiUrl = "http://localhost:8080/api/MedicalRecord";
@@ -203,12 +180,12 @@ export default function Body() {
 
     return (
         <Container className={classes.container} maxWidth="md">
-          <Snackbar open={success} autoHideDuration={5000} onClose={handleClose}>
+          <Snackbar open={success} autoHideDuration={1000} onClose={handleClose} TransitionProps={{onExit:()=>(window.location.href="/")}}>
             <Alert onClose={handleClose} severity="success">
               บันทึกข้อมูลสำเร็จ
             </Alert>
           </Snackbar>
-          <Snackbar open={error} autoHideDuration={5000} onClose={handleClose}>
+          <Snackbar open={error} autoHideDuration={1000} onClose={handleClose}>
             <Alert onClose={handleClose} severity="error">
               บันทึกข้อมูลไม่สำเร็จ
             </Alert>
@@ -240,10 +217,9 @@ export default function Body() {
                         <Select variant="outlined"
                             disabled
                             defaultValue={0}
-                            value={MedicalTech?.ID}
                             style={{ width: 400 }}
                         >
-                            <MenuItem value={0}>{MedicalTech?.Name}</MenuItem>
+                            <MenuItem value={0}>{MedicalTech.Name}</MenuItem>
                         </Select>
                     </Grid>
 
@@ -344,8 +320,7 @@ export default function Body() {
                                 variant="contained" 
                                 color="primary" 
                                 onClick={submitLabresult} 
-                                component={RouterLink}
-                                to="/"
+                                
                                 >SUBMIT</Button>
                     </Grid>
 

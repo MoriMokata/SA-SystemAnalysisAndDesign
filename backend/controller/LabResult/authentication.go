@@ -18,26 +18,27 @@ type LoginPayload struct {
 // LoginResponse token response
 type LoginResponse struct {
 	Token string `json:"token"`
-	ID    uint   `json:"id"`
+	MedicalTech entity.MedicalTech `json:"medicaltech"`
+
 }
 
 // POST /login
 func Login(c *gin.Context) {
 	var payload LoginPayload
-	var user entity.MedicalTech
+	var MedicalTech entity.MedicalTech
 
 	if err := c.ShouldBindJSON(&payload); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 	// ค้นหา user ด้วย email ที่ผู้ใช้กรอกเข้ามา
-	if err := entity.DB().Raw("SELECT * FROM medical_teches WHERE email = ?", payload.Email).Scan(&user).Error; err != nil {
+	if err := entity.DB().Raw("SELECT * FROM medical_teches WHERE email = ?", payload.Email).Scan(&MedicalTech).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	// ตรวจสอบรหัสผ่าน
-	err := bcrypt.CompareHashAndPassword([]byte(user.Pass), []byte(payload.Pass))
+	err := bcrypt.CompareHashAndPassword([]byte(MedicalTech.Pass), []byte(payload.Pass))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid user credentials"})
 		return
@@ -54,7 +55,7 @@ func Login(c *gin.Context) {
 		ExpirationHours: 24,
 	}
 
-	signedToken, err := jwtWrapper.GenerateToken(user.Email)
+	signedToken, err := jwtWrapper.GenerateToken(MedicalTech.Email)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "error signing token"})
 		return
@@ -62,7 +63,8 @@ func Login(c *gin.Context) {
 
 	tokenResponse := LoginResponse{
 		Token: signedToken,
-		ID:    user.ID,
+		MedicalTech :MedicalTech,
+		
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": tokenResponse})

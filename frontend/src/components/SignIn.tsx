@@ -55,7 +55,7 @@ function SignIn() {
         if (res.data) {
           setSuccess(true);
           localStorage.setItem("token", res.data.token);
-          localStorage.setItem("uid", res.data.id);
+          localStorage.setItem("MedicalTech",JSON.stringify(res.data.medicaltech));
           window.location.reload()
         } else {
           setError(true);
@@ -121,7 +121,7 @@ function SignIn() {
             required
             fullWidth
             name="Pass"
-            label="Pass"
+            label="PassWord"
             type="pass"
             id="Pass"
             autoComplete="current-pass"
