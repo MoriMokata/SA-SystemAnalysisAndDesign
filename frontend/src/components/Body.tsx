@@ -68,7 +68,7 @@ export default function Body() {
     
     const [MedicalRecord, setMedicalRecord] = useState<MedicalRecordInterface[]>([]);
     const getMedicalRecord = async() => {
-        const apiUrl = "http://localhost:8080/api/MedicalRecord";
+        const apiUrl = "http://localhost:8080/api/ListMedicalRecord";
         const requestOptions = {
           method: "GET",
           headers: { 
@@ -90,7 +90,7 @@ export default function Body() {
       
       const [LabRoom, setLabRoom] = useState<LabRoomInterface[]>([]);
       const getLabRoom = async() => {
-          const apiUrl = "http://localhost:8080/api/LabRoom";
+          const apiUrl = "http://localhost:8080/api/ListLabRoom";
           const requestOptions = {
             method: "GET",
             headers: { 
@@ -112,7 +112,7 @@ export default function Body() {
 
         const [LabType, setLabType] = useState<LabTypeInterface[]>([]);
         const getLabType = async() => {
-          const apiUrl = "http://localhost:8080/api/LabType";
+          const apiUrl = "http://localhost:8080/api/ListLabType";
           const requestOptions = {
             method: "GET",
             headers: { 
@@ -158,7 +158,7 @@ export default function Body() {
 	    AddedTime:  AddedTime
     };
 
-    const apiUrl = "http://localhost:8080/api/submit";
+    const apiUrl = "http://localhost:8080/api/CreateLabResult";
     const requestOptionsPost = {
       method: "POST",
       headers: {
@@ -180,7 +180,7 @@ export default function Body() {
 
     return (
         <Container className={classes.container} maxWidth="md">
-          <Snackbar open={success} autoHideDuration={1000} onClose={handleClose} TransitionProps={{onExit:()=>(window.location.href="/")}}>
+          <Snackbar open={success} autoHideDuration={1000} onClose={handleClose} TransitionProps={{onExit:()=>(window.location.href="/History")}}>
             <Alert onClose={handleClose} severity="success">
               บันทึกข้อมูลสำเร็จ
             </Alert>

@@ -9,36 +9,35 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-// LoginPayload login body
-type LoginPayload struct {
-	Email    string `json:"email"`
-	Pass string `json:"pass"`
+// LoginMedicalRecordOfficerPayload login body
+type LoginMedicalRecordOfficerPayload struct {
+	MedRecOfficer_Email string `json:"email"`
+	MedRecOfficer_Pass  string `json:"pass"`
 }
 
-// LoginResponse token response
-type LoginResponse struct {
-	Token string `json:"token"`
-	MedicalTech entity.MedicalTech `json:"medicaltech"`
-
+// LoginMedicalRecordOfficerResponse token response
+type LoginMedicalRecordOfficerResponse struct {
+	Token                string                      `json:"token"`
+	MedicalRecordOfficer entity.MedicalRecordOfficer `json:"medicalrecordofficer"`
 }
 
-// POST /login
-func Login(c *gin.Context) {
-	var payload LoginPayload
-	var MedicalTech entity.MedicalTech
+// POST /LoginMedicalRecordOfficer
+func LoginMedicalRecordOfficer(c *gin.Context) {
+	var payload LoginMedicalRecordOfficerPayload
+	var MedicalRecordOfficer entity.MedicalRecordOfficer
 
 	if err := c.ShouldBindJSON(&payload); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
-	// ค้นหา user ด้วย email ที่ผู้ใช้กรอกเข้ามา
-	if err := entity.DB().Raw("SELECT * FROM medical_teches WHERE email = ?", payload.Email).Scan(&MedicalTech).Error; err != nil {
+	// ค้นหา MedicalRecordOfficer ด้วย email ที่ผู้ใช้กรอกเข้ามา
+	if err := entity.DB().Raw("SELECT * FROM medical_record_officers WHERE med_rec_officer_email = ?", payload.MedRecOfficer_Email).Scan(&MedicalRecordOfficer).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	// ตรวจสอบรหัสผ่าน
-	err := bcrypt.CompareHashAndPassword([]byte(MedicalTech.Pass), []byte(payload.Pass))
+	err := bcrypt.CompareHashAndPassword([]byte(MedicalRecordOfficer.MedRecOfficer_Email), []byte(payload.MedRecOfficer_Pass))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid user credentials"})
 		return
@@ -55,16 +54,15 @@ func Login(c *gin.Context) {
 		ExpirationHours: 24,
 	}
 
-	signedToken, err := jwtWrapper.GenerateToken(MedicalTech.Email)
+	signedToken, err := jwtWrapper.GenerateToken(MedicalRecordOfficer.MedRecOfficer_Email)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "error signing token"})
 		return
 	}
 
-	tokenResponse := LoginResponse{
-		Token: signedToken,
-		MedicalTech :MedicalTech,
-		
+	tokenResponse := LoginMedicalRecordOfficerResponse{
+		Token:       signedToken,
+		MedicalRecordOfficer: MedicalRecordOfficer,
 	}
 
 	c.JSON(http.StatusOK, gin.H{"data": tokenResponse})

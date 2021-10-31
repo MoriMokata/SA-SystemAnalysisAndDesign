@@ -36,7 +36,7 @@ export default function History() {
     const [LabResult, setLabResult] = useState<LabresultInterface[]>([]);
   
     const getLabResult = async() => {
-      const apiUrl = "http://localhost:8080/api/LabResult";
+      const apiUrl = "http://localhost:8080/api/ListLabResult";
       const requestOptions = {
         method: "GET",
         headers: {

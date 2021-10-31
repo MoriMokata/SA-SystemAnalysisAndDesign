@@ -1,11 +1,17 @@
 package main
 
 import (
-	"github.com/MoriMokata/project/backend/controller/LabResult"
+	Actor "github.com/MoriMokata/project/backend/controller/Actor"
+	Disease "github.com/MoriMokata/project/backend/controller/Disease"
+	DrugAllergy "github.com/MoriMokata/project/backend/controller/DrugAllergy"
+	LabResult "github.com/MoriMokata/project/backend/controller/LabResult"
+	MedicalRecord "github.com/MoriMokata/project/backend/controller/MedicalRecord"
+	MedicalHistory "github.com/MoriMokata/project/backend/controller/MedicalHistory"
+	Refer "github.com/MoriMokata/project/backend/controller/Refer"
+	Screening "github.com/MoriMokata/project/backend/controller/Screening"
 	"github.com/MoriMokata/project/backend/entity"
 	"github.com/MoriMokata/project/backend/middlewares"
 	"github.com/gin-gonic/gin"
-	
 )
 
 func main() {
@@ -17,18 +23,53 @@ func main() {
 	{
 		protected := api.Use(middlewares.Authorizes())
 		{
-			protected.GET("/api/MedicalTech/:id", controller.GetMedicalTech)
-			protected.GET("/api/MedicalRecord", controller.ListMedicalRecord)
-			protected.GET("/api/LabType", controller.ListLabType)
-			protected.GET("/api/LabRoom", controller.ListLabRoom)
-			protected.GET("/api/LabResult", controller.ListLabResult)
-			protected.POST("/api/submit", controller.CreateLabResult)	
+			//api Diseases
+			protected.GET("/api/ListDiseases", Disease.ListDiseases)
+
+			//api DrugAllergy
+			protected.GET("/api/CreateDrugAllergy", DrugAllergy.CreateDrugAllergy)
+			protected.GET("/api/ListDrugAllergy", DrugAllergy.ListDrugAllergy)
+			protected.GET("/api/ListDrug", DrugAllergy.ListDrug)
+
+			//api MedicalRecord
+			protected.GET("/api/ListMedicalRecord", MedicalRecord.ListMedicalRecord)
+			protected.GET("/api/ListHealthInsurance", MedicalRecord.ListHealthInsurance)
+			protected.GET("/api/ListNameTitle", MedicalRecord.ListNameTitle)
+			protected.GET("/api/CreateMedicalRecord", MedicalRecord.CreateMedicalRecord)
+
+			//api MedicalHistory
+			protected.GET("/api/ListDepartments", MedicalHistory.ListDepartments)
+			protected.GET("/api/CreateMedicalHistory", MedicalHistory.CreateMedicalHistory)
+			protected.GET("/api/ListMedicalHistories", MedicalHistory.ListMedicalHistories)
+
+			//api Refer
+			protected.GET("/api/ListHospitals", Refer.ListHospitals)
+			protected.GET("/api/CreateRefer", Refer.CreateRefer)
+			protected.GET("/api/ListRefer", Refer.ListRefer)
+
+			//api Screening
+			protected.GET("/api/CreateScreening", Screening.CreateScreening)
+			protected.GET("/api/ListScreening", Screening.ListScreening)
+			protected.GET("/api/PreloadScreenings", Screening.PreloadScreenings)
+			
+			//api ListLabResult
+			protected.GET("/api/ListLabType", LabResult.ListLabType)
+			protected.GET("/api/ListLabRoom", LabResult.ListLabRoom)
+			protected.POST("/api/CreateLabResult", LabResult.CreateLabResult)
+			protected.GET("/api/ListLabResult", LabResult.ListLabResult)
+			
+			
 
 		}
 	}
-	r.POST("/api/login", controller.Login)
-	// Run the server
+	//Get func login/Actor
+	r.POST("/api/LoginDoctor", Actor.LoginDoctor)
+	r.POST("/api/LoginMedicalRecordOfficer", Actor.LoginMedicalRecordOfficer)
+	r.POST("/api/LoginMedicalTech", Actor.LoginMedicalTech)
+	r.POST("/api/LoginNurse", Actor.LoginNurse)
+	
 
+	// Run the server
 	r.Run()
 }
 func CORSMiddleware() gin.HandlerFunc {

@@ -61,7 +61,7 @@ func CreateLabResult(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": lr})
 }
 
-// GET: /api/
+// GET: /api/ListLabResult
 func ListLabResult(c *gin.Context) {
 	var LabResult []*entity.LabResult
 	if err := entity.DB().Preload("MedicalTech").Preload("MedicalRecord").Preload("LabType").Preload("LabRoom").Table("lab_results").Find(&LabResult).Error; err != nil {

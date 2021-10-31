@@ -43,7 +43,7 @@ function SignIn() {
   const [error, setError] = useState(false);
 
   const login = () => {
-    const apiUrl = "http://localhost:8080/api/login";
+    const apiUrl = "http://localhost:8080/api/LoginMedicalTech";
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
