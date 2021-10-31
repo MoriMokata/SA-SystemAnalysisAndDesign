@@ -32,20 +32,23 @@ func SetupDatabase() {
 	db = database
 
 	//setup MedicalRecord
+	PasswordMedicalRecordOfficer1, err := bcrypt.GenerateFromPassword([]byte("111111a"), 14)
 	MedicalRecordOfficer1 := MedicalRecordOfficer{
 		MedRecOfficer_Name:  "Rosie",
 		MedRecOfficer_Email: "rosie@gmail.com",
-		MedRecOfficer_Pass:  "111111a",
+		MedRecOfficer_Pass:  string(PasswordMedicalRecordOfficer1),
 	}
 	db.Model(&MedicalRecordOfficer{}).Create(&MedicalRecordOfficer1)
 
+	PasswordMedicalRecordOfficer2, err := bcrypt.GenerateFromPassword([]byte("2222222a"), 14)
 	MedicalRecordOfficer2 := MedicalRecordOfficer{
 		MedRecOfficer_Name:  "Carla",
 		MedRecOfficer_Email: "carla@gmail.com",
-		MedRecOfficer_Pass:  "2222222a",
+		MedRecOfficer_Pass:  string(PasswordMedicalRecordOfficer2),
 	}
 	db.Model(&MedicalRecordOfficer{}).Create(&MedicalRecordOfficer2)
 
+	// setup nametitle
 	NameTitle1 := NameTitle{
 		Title: "นาง",
 	}
@@ -62,15 +65,17 @@ func SetupDatabase() {
 	db.Model(&NameTitle{}).Create(&NameTitle3)
 
 	NameTitle4 := NameTitle{
-		Title: "เด็กหญิง",
+		Title: "เด็กชาย",
 	}
 	db.Model(&NameTitle{}).Create(&NameTitle4)
 
 	NameTitle5 := NameTitle{
-		Title: "เด็กชาย",
+		Title: "เด็กหญิง",
 	}
 	db.Model(&NameTitle{}).Create(&NameTitle5)
 
+
+	//setup HealthInsurance
 	HealthInsurance1 := HealthInsurance{
 		HealthInsurance_Name: "นักศึกษา",
 		Detail:               "นักศึกษามหาวิทยาลัยเทคโนโลยีสุรนารีรักษาฟรี",
@@ -83,116 +88,202 @@ func SetupDatabase() {
 	}
 	db.Model(&HealthInsurance{}).Create(&HealthInsurance2)
 
+	//setup MedicalRecord1
 	MedicalRecord1 := MedicalRecord{
-		Hospital_Number: "1234",
-		Personal_ID:     "567",
-
-		Patient_Name:    "seeruk",
-		Patient_Age:     23,
+		Hospital_Number: "2001",
+		Personal_ID:     "1234567891234",
+		Patient_Name:    "Saifon",
+		Patient_Age:     21,
 		Patient_dob:     time.Now(),
-		Patient_Tel:     "094-XXXXXX",
+		Patient_Tel:     "0823642199",
 		Register_Date:   time.Now(),
-		HealthInsurance: HealthInsurance1,
-		MedRecOfficer:   MedicalRecordOfficer1,
+		HealthInsurance: HealthInsurance2,
+		MedRecOfficer:   MedicalRecordOfficer2,
 		NameTitle:       NameTitle2,
 	}
 	db.Model(MedicalRecord{}).Create(&MedicalRecord1)
 
-	//setup Screening
+	MedicalRecord2 := MedicalRecord{
+		Hospital_Number: "2002",
+		Personal_ID:     "9876543210123",
+		Patient_Name:    "Sainam",
+		Patient_Age:     26,
+		Patient_dob:     time.Now(),
+		Patient_Tel:     "0987475566",
+		Register_Date:   time.Now(),
+		HealthInsurance: HealthInsurance1,
+		MedRecOfficer:   MedicalRecordOfficer1,
+		NameTitle:       NameTitle3,
+	}
+	db.Model(MedicalRecord{}).Create(&MedicalRecord2)
+
+	//setup Disease
 	Disease1 := Disease{
-		Name:        "sore throat",
-		Description: "Most sore throats are caused by infections",
+		Name:        "Dengue",
+		Description: "illnesses that cause fever, aches and pains, or a rash. The most common symptom of dengue is fever",
 	}
 	db.Model(&Disease{}).Create(&Disease1)
 
-	password1, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
+	Disease2 := Disease{
+		Name:        "Heart attack",
+		Description: "the chest can feel like it's being pressed or squeezed by a heavy object, and pain can radiate from the chest to the jaw, neck, arms and back",
+	}
+	db.Model(&Disease{}).Create(&Disease2)
+
+	Disease3 := Disease{
+		Name:        "Gastritis",
+		Description: "Gnawing or burning ache or pain (indigestion) in your upper abdomen that may become either worse or better with eating",
+	}
+	db.Model(&Disease{}).Create(&Disease3)
+
+	//setup Nurse
+	PasswordNurse1, err := bcrypt.GenerateFromPassword([]byte("1234"), 14)
 	Nurse1 := Nurse{
-		Name:  "nueng",
-		Email: "nueng@gmail.com",
-		Pass:  string(password1),
+		Name:  "pakapon seepakdee",
+		Email: "pakapon@gmail.com",
+		Pass:  string(PasswordNurse1),
 	}
 	db.Model(&Nurse{}).Create(&Nurse1)
 
-	password2, err := bcrypt.GenerateFromPassword([]byte("123456"), 14)
+	PasswordNurse2, err := bcrypt.GenerateFromPassword([]byte("123"), 14)
 	Nurse2 := Nurse{
-		Name:  "pakapon",
-		Email: "pakapon@gmail.com",
-		Pass:  string(password2),
+		Name:  "kritsada papakdee",
+		Email: "big16635@gmail.com",
+		Pass:  string(PasswordNurse2),
 	}
 	db.Model(&Nurse{}).Create(&Nurse2)
 
-	Screening1 := Screening{
-		Symptoms:        "sore throat",
-		Weight:          58,
-		Height:          170,
-		Temperature:     37,
-		PulseRate:       120,
-		RespirationRate: 80,
-		MedRec:          MedicalRecord1,
-		Disease:         Disease1,
-		Nurse:           Nurse1,
+	PasswordNurse3, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)
+	Nurse3 := Nurse{
+		Name:  "somying kondee",
+		Email: "somying@gmail.com",
+		Pass:  string(PasswordNurse3),
 	}
-	db.Model(&Screening{}).Create(&Screening1)
+	db.Model(&Nurse{}).Create(&Nurse3)
 
-	//setup DrugAllergy
+	
+	//setup Drug
 	Drug1 := Drug{
-		Drug_Name:       "Ruds1",
-		Drug_properties: "RUCAAA",
-		Drug_group:      "NRNS",
-		Stock:           10,
+		Drug_Name:       "Amantadine",
+		Drug_properties: "รักษาไข้หวัดใหญ่สายพันธุ์เอ และโรคพาร์กินสัน",
+		Drug_group:      "ยาต้านไวรัส",
+		Stock:           20,
 	}
 	db.Model(&Drug{}).Create(&Drug1)
 
-	//setup refer
-	/////
-	///////
-	//////////
-	/////////////
-	/////////////////
+	Drug2 := Drug{
+		Drug_Name:       "Lithium",
+		Drug_properties: "บรรเทาหรือป้องกันการเกิดซ้ำของอาการจากโรคอารมณ์สองขั้ว ภาวะอารมณ์ดีตื่นตัวผิดปกติ",
+		Drug_group:      "ยารักษาโรคจิต (Antipsychotics)",
+		Stock:           500,
+	}
+	db.Model(&Drug{}).Create(&Drug2)
 
-	//setup labresult
-	Pass1, err := bcrypt.GenerateFromPassword([]byte("1"), 14)
-	Pass2, err := bcrypt.GenerateFromPassword([]byte("123"), 14)
+	//setup MedicalTech
+	PassMedicalTech1, err := bcrypt.GenerateFromPassword([]byte("123"), 14)
+	PassMedicalTech2, err := bcrypt.GenerateFromPassword([]byte("12345"), 14)
 
 	MedicalTech1 := MedicalTech{
-		Name:  "Boss",
+		Name:  "Chalermkiet kongkapan",
 		Email: "chalermkiet@gmail.com",
-		Pass:  string(Pass1),
+		Pass:  string(PassMedicalTech1),
 	}
 	db.Model(&MedicalTech{}).Create(&MedicalTech1)
 
 	MedicalTech2 := MedicalTech{
-		Name:  "chalermkiet",
-		Email: "boss@gmail.com",
-		Pass:  string(Pass2),
+		Name:  "Somkiat Kongkapan",
+		Email: "Somkiat@gmail.com",
+		Pass:  string(PassMedicalTech2),
 	}
 	db.Model(&MedicalTech{}).Create(&MedicalTech2)
 
+	//setup LabType
 	LabType1 := LabType{
-		Name: "blood",
+		Name: "Blood test",
 	}
 	db.Model(&LabType{}).Create(&LabType1)
 
 	LabType2 := LabType{
-		Name: "Atom",
+		Name: "Urinalysis test",
 	}
 	db.Model(&LabType{}).Create(&LabType2)
 
+	//setup LabRoom
 	LabRoom1 := LabRoom{
-		Name:     "room1",
-		Building: "gf",
+		Name:     "Hematology",
+		Building: "Rattanavejjapat",
 		floor:    1,
 	}
 	db.Model(&LabRoom{}).Create(&LabRoom1)
 
-	LabResult1 := LabResult{
-		MedicalTech:   MedicalTech1,
-		MedicalRecord: MedicalRecord1,
-		LabType:       LabType1,
-		Lab_Result:    "wait MoKaTa",
-		Lab_Detail:    "wait MokaTa",
-		LabRoom:       LabRoom1,
-		AddedTime:     time.Now(),
+	LabRoom2 := LabRoom{
+		Name:     "Microbiology",
+		Building: "Research Center",
+		floor:    7,
 	}
-	db.Model(&LabResult{}).Create(&LabResult1)
+	db.Model(&LabRoom{}).Create(&LabRoom2)
+
+	//setup Doctor
+	PasswordDoctor1, err := bcrypt.GenerateFromPassword([]byte("yhyh555"), 14)
+	Doctor1 := Doctor{
+		Name:     "Yohan Song",
+		Tel:      "0885556699",
+		Email:    "yh.s@hp.ac.th",
+		Password: string(PasswordDoctor1),
+	}
+	db.Model(&Doctor{}).Create(&Doctor1)
+
+	PasswordDoctor2, err := bcrypt.GenerateFromPassword([]byte("password1234"), 14)
+	Doctor2 := Doctor{
+		Name:     "Supot Jamsai",
+		Tel:      "0877774412",
+		Email:    "supot.j@hp.ac.th",
+		Password: string(PasswordDoctor2),
+	}
+	db.Model(&Doctor{}).Create(&Doctor2)
+
+	PasswordDoctor3, err := bcrypt.GenerateFromPassword([]byte("123456789"), 14)
+	Doctor3 := Doctor{
+		Name:     "Suchawadee Teangtrong",
+		Tel:      "0644416289",
+		Email:    "Suchawadee@gmail.com",
+		Password: string(PasswordDoctor3),
+	}
+	db.Model(&Doctor{}).Create(&Doctor3)
+
+	//setup Department
+	Department1 := Department{
+		Name:     "Emergency Room",
+		Building: "Surapiphat",
+		Floor:    1,
+	}
+	db.Model(&Department{}).Create(&Department1)
+
+	Department2 := Department{
+		Name:     "Radiology Department",
+		Building: "Thepnipa",
+		Floor:    5,
+	}
+	db.Model(&Department{}).Create(&Department2)
+
+	Department3 := Department{
+		Name:     "Pediatrics Department",
+		Building: "Pataranavee",
+		Floor:    5,
+	}
+	db.Model(&Department{}).Create(&Department3)
+
+	//setup Hospital
+	Hospital1 := Hospital{
+		Name: "Srithanya Hospital",
+		Tel:  "025287800",
+	}
+	db.Model(&Hospital{}).Create(&Hospital1)
+
+	Hospital2 := Hospital{
+		Name: "Suranaree Hospital",
+		Tel:  "020000000",
+	}
+	db.Model(&Hospital{}).Create(&Hospital2)
+
 }
