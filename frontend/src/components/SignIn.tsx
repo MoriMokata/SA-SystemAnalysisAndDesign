@@ -122,7 +122,7 @@ function SignIn() {
             fullWidth
             name="Pass"
             label="PassWord"
-            type="pass"
+            type="password"
             id="Pass"
             autoComplete="current-pass"
             value={signin.Pass || ""}
