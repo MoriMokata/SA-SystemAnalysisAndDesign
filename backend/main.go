@@ -1,16 +1,16 @@
 package main
 
 import (
-	Actor "github.com/MoriMokata/project/backend/controller/Actor"
-	Disease "github.com/MoriMokata/project/backend/controller/Disease"
-	DrugAllergy "github.com/MoriMokata/project/backend/controller/DrugAllergy"
-	LabResult "github.com/MoriMokata/project/backend/controller/LabResult"
-	MedicalHistory "github.com/MoriMokata/project/backend/controller/MedicalHistory"
-	MedicalRecord "github.com/MoriMokata/project/backend/controller/MedicalRecord"
-	Refer "github.com/MoriMokata/project/backend/controller/Refer"
-	Screening "github.com/MoriMokata/project/backend/controller/Screening"
-	"github.com/MoriMokata/project/backend/entity"
-	"github.com/MoriMokata/project/backend/middlewares"
+	Actor "github.com/Project/controller/Actor"
+	Disease "github.com/Project/controller/Disease"
+	DrugAllergy "github.com/Project/controller/DrugAllergy"
+	LabResult "github.com/Project/controller/LabResult"
+	MedicalHistory "github.com/Project/controller/MedicalHistory"
+	MedicalRecord "github.com/Project/controller/MedicalRecord"
+	Refer "github.com/Project/controller/Refer"
+	Screening "github.com/Project/controller/Screening"
+	"github.com/Project/entity"
+	"github.com/Project/middlewares"
 	"github.com/gin-gonic/gin"
 )
 

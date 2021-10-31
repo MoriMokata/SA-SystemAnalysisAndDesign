@@ -62,7 +62,7 @@ export default function History() {
   
     return (
       <div>
-      <Container className={classes.container} maxWidth="md">
+      <Container className={classes.container} maxWidth="lg">
         <Box display="flex">
           <Box flexGrow={1}>
             <Typography

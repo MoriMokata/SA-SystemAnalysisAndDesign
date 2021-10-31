@@ -3,8 +3,8 @@ package controller
 import (
 	"net/http"
 
-	"github.com/MoriMokata/project/backend/entity"
-	"github.com/MoriMokata/project/backend/service"
+	"github.com/Project/entity"
+	"github.com/Project/service"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )

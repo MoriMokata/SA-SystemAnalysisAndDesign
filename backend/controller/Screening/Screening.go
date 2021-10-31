@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"github.com/MoriMokata/project/backend/entity"
+	"github.com/Project/entity"
 
 	"github.com/gin-gonic/gin"
 
