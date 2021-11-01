@@ -6,6 +6,7 @@ import SignIn from "./components/SignIn";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from './components/Home';
 
+
 function App() {
   const [token, setToken] = useState<string>("");
 
@@ -30,6 +31,8 @@ function App() {
               <Route exact path="/" component={Home} />
               <Route exact path="/History" component={History} />
               <Route exact path="/link/body" component={Body} />
+              
+
             </Switch>
           </Fragment>
         )}
