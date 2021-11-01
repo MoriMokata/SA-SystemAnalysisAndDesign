@@ -26,37 +26,24 @@ let CheckRole = String(localStorage.getItem("Role"));
   return (
     <div>
       <Router>
-        {token && (() => {
-          if (CheckRole === "MedicalTech") {
-            <Fragment>
-              <Navbar />
-              <Switch>
-                {/* MedicalTech Route */}
-              </Switch>
-            </Fragment>
-          } else if (CheckRole === "Doctor") {
-            <Fragment>
-              <Navbar />
-              <Switch>
-                {/* Doctor Route */}
-              </Switch>
-            </Fragment>
-          } else if (CheckRole === "Nurse") {
-            <Fragment>
-              <Navbar />
-              <Switch>
-                {/* Nurse Route */}
-              </Switch>
-            </Fragment>
-          } else if (CheckRole === "MedicalOfficer") {
-            <Fragment>
-              <Navbar />
-              <Switch>
-                {/* MedicalOfficer Route */}
-              </Switch>
-            </Fragment>
-          } else {{/* else */}}           
-        })}
+        {token && CheckRole === "MedicalTech" ? (
+          <>
+            <Navbar />
+          </>
+        ) : (CheckRole === "Nurse" ? (
+          <>
+            <Navbar />
+          </>
+        ) : (CheckRole === "Doctor" ? (
+          <>
+            <Navbar />
+          </>
+        ) : (CheckRole === "Doctor" ? (
+          <>
+            <Navbar />
+          </>
+        ) : (<>{/* else condition */}</>))))
+        }
       </Router>
     </div>
 
