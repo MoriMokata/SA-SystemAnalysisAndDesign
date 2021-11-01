@@ -286,4 +286,6 @@ func SetupDatabase() {
 	}
 	db.Model(&Hospital{}).Create(&Hospital2)
 
+	
+
 }

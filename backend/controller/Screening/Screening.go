@@ -8,14 +8,7 @@ import (
 	"net/http"
 )
 
-func ListScreening(c *gin.Context) {
-	var Screening []entity.Disease
-	if err := entity.DB().Table("screenings").Find(&Screening).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-	c.JSON(http.StatusOK, gin.H{"data": Screening})
-}
+
 
 func CreateScreening(c *gin.Context) {
 

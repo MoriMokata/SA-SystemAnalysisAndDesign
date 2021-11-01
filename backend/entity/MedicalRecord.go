@@ -50,17 +50,17 @@ type MedicalRecord struct {
 	MedRecOfficer   MedicalRecordOfficer
 
 	// เชื่อมกับ Screenings
-	Screenings []Screening `gorm:"foreignKey:MedRecID"`
+	Screenings []Screening `gorm:"foreignKey:MedRecID;constraint:OnDelete:CASCADE"`
 
 	// เชื่อมกับ DrugAllergies
-	DrugAllergies []DrugAllergy `gorm:"foreignKey:MedicalRecordID"`
+	DrugAllergies []DrugAllergy `gorm:"foreignKey:MedicalRecordID;constraint:OnDelete:CASCADE"`
 
 	//เชื่อมกับ MedicalHistory
-	MedicalHistories []MedicalHistory `gorm:"foreignKey:MedicalRecordID"`
+	MedicalHistories []MedicalHistory `gorm:"foreignKey:MedicalRecordID;constraint:OnDelete:CASCADE"`
 
 	//เชื่อมกับ refers
-	Refers []Refer `gorm:"foreignKey:MedicalRecordID"`
+	Refers []Refer `gorm:"foreignKey:MedicalRecordID;constraint:OnDelete:CASCADE"`
 
 	//เชื่อมกับ LabResult
-	LabResults []LabResult `gorm:"foreignKey:MedicalRecordID"`
+	LabResults []LabResult `gorm:"foreignKey:MedicalRecordID;constraint:OnDelete:CASCADE"`
 }
