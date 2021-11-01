@@ -37,7 +37,7 @@ func LoginMedicalRecordOfficer(c *gin.Context) {
 	}
 
 	// ตรวจสอบรหัสผ่าน
-	err := bcrypt.CompareHashAndPassword([]byte(MedicalRecordOfficer.MedRecOfficer_Email), []byte(payload.MedRecOfficer_Pass))
+	err := bcrypt.CompareHashAndPassword([]byte(MedicalRecordOfficer.MedRecOfficer_Pass), []byte(payload.MedRecOfficer_Pass))
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid user credentials"})
 		return
@@ -61,7 +61,7 @@ func LoginMedicalRecordOfficer(c *gin.Context) {
 	}
 
 	tokenResponse := LoginMedicalRecordOfficerResponse{
-		Token:       signedToken,
+		Token:                signedToken,
 		MedicalRecordOfficer: MedicalRecordOfficer,
 	}
 

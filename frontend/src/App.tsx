@@ -38,7 +38,7 @@ let CheckRole = String(localStorage.getItem("Role"));
           <>
             <Navbar />
           </>
-        ) : (CheckRole === "Doctor" ? (
+        ) : (CheckRole === "MedicalRecordOfficer" ? (
           <>
             <Navbar />
           </>
