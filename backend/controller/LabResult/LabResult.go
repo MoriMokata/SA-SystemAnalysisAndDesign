@@ -14,46 +14,46 @@ func CreateLabResult(c *gin.Context) {
 	var LabRoom entity.LabRoom
 	var LabResult entity.LabResult
 
-	// ผลลัพธ์ที่ได้จากขั้นตอนที่ 9 จะถูก bind เข้าตัวแปร LabResult
+	// ผลลัพธ์ที่ได้จากขั้นตอนที่ 8 จะถูก bind เข้าตัวแปร LabResult
 	if err := c.ShouldBindJSON(&LabResult); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	// 10: ค้นหา MedicalTech ด้วย id
+	// 9: ค้นหา MedicalTech ด้วย id
 	if tx := entity.DB().Where("id = ?", LabResult.MedicalTechID).First(&MedicalTech); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "MedicalTech not found"})
 		return
 	}
 
-	// 11: ค้นหา MedicalRecord ด้วย id
+	// 10: ค้นหา MedicalRecord ด้วย id
 	if tx := entity.DB().Where("id = ?", LabResult.MedicalRecordID).First(&MedicalRecord); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "MedicalRecord not found"})
 		return
 	}
 
-	// 12: ค้นหา LabType ด้วย id
+	// 11: ค้นหา LabType ด้วย id
 	if tx := entity.DB().Where("id = ?", LabResult.LabTypeID).First(&LabType); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "LabType not found"})
 		return
 	}
-	//13: ค้นหา LabRoom ด้วย id
+	//12: ค้นหา LabRoom ด้วย id
 	if tx := entity.DB().Where("id = ?", LabResult.LabRoomID).First(&LabRoom); tx.RowsAffected == 0 {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "LabRoom not found"})
 		return
 	}
-	// 14: สร้าง LabResult
+	// 13: สร้าง LabResult
 	lr := entity.LabResult{
-		MedicalTech:  MedicalTech,             
-		MedicalRecord:       MedicalRecord,                  
-		LabType:    LabType,
+		MedicalTech:  MedicalTech,      //Mt       
+		MedicalRecord:       MedicalRecord, //Mr                 
+		LabType:    LabType,	//Type
 		Lab_Result: LabResult.Lab_Result,    
 		Lab_Detail: LabResult.Lab_Detail,    
-		LabRoom: LabRoom,       
+		LabRoom: LabRoom,       //Room
 		AddedTime: LabResult.AddedTime,
 	}
 
-	// 15: บันทึก
+	// 14: บันทึก
 	if err := entity.DB().Create(&lr).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
