@@ -12,7 +12,7 @@ type Department struct {
 	gorm.Model
 	Name             string
 	Building         string
-	Floor            uint
+	Floor            int
 	MedicalHistories []MedicalHistory `gorm:"foreignKey:DepartmentID"`
 }
 
