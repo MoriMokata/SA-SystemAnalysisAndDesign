@@ -32,7 +32,6 @@ function App() {
               <Route exact path="/History" component={History} />
               <Route exact path="/link/body" component={Body} />
               
-
             </Switch>
           </Fragment>
         )}

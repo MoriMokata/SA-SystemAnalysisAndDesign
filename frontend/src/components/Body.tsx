@@ -1,7 +1,6 @@
 import React, { ChangeEvent,
     useEffect,
     useState, 
-    Fragment, 
     SyntheticEvent } from 'react';
 import { Link as RouterLink } from "react-router-dom";
 import { makeStyles, Theme, createStyles } from "@material-ui/core/styles";
@@ -168,8 +167,8 @@ export default function Body() {
     };
 
     fetch(apiUrl, requestOptionsPost)
-      .then((response) => response.json())
-      .then((res) => {
+    .then((response) => response.json())
+    .then((res) => {
         if (res.data) {
           setSuccess(true);
         } else {
@@ -217,7 +216,7 @@ export default function Body() {
                         <Select variant="outlined"
                             disabled
                             defaultValue={0}
-                            style={{ width: 400 }}
+                            fullWidth
                         >
                             <MenuItem value={0}>{MedicalTech.Name}</MenuItem>
                         </Select>
@@ -229,7 +228,7 @@ export default function Body() {
                             value={Labresult.MedicalRecordID}
                             inputProps={{name: "MedicalRecordID"}}
                             onChange={handleLabresultChange}
-                            style={{ width: 400 }}
+                            fullWidth
                         >
                             <MenuItem value={0} key={0}>เลือกชื่อผู้ป่วย</MenuItem>
                             {MedicalRecord.map((item: MedicalRecordInterface) => (
@@ -245,7 +244,7 @@ export default function Body() {
                             value={Labresult.LabTypeID}
                             inputProps={{name: "LabTypeID"}}
                             onChange={handleLabresultChange}
-                            style={{ width: 400 }}
+                            fullWidth
                         >
                             <MenuItem value={0} key={0}>เลือกห้องปฎิบัติการ</MenuItem>
                             {LabType.map((item: LabTypeInterface) => (
@@ -258,10 +257,10 @@ export default function Body() {
                         <TextField 
                             id="Lab_Result"
                             type="string"
+                            fullWidth
                             inputProps={{name:"Lab_Result"}}
                             value={Labresult.Lab_Result || ""}
                             onChange={handleLabresultChange}
-                            className={classes.textfield} 
                             variant="outlined" />
                     </Grid>
 
@@ -270,11 +269,13 @@ export default function Body() {
                         <TextField 
                             id="Lab_Detail"
                             type="string"
+                            fullWidth
                             inputProps={{name:"Lab_Detail"}}
                             value={Labresult.Lab_Detail || ""}
                             onChange={handleLabresultChange}
-                            className={classes.textfield} 
+                            
                             variant="outlined" /> 
+                            
                     </Grid>
 
                     <Grid item xs={6}>
@@ -283,7 +284,7 @@ export default function Body() {
                                 value={Labresult.LabRoomID}
                                 inputProps={{name: "LabRoomID"}}
                                 onChange={handleLabresultChange}
-                                style={{ width: 400 }}
+                                fullWidth
                             >
                                 <MenuItem value={0} key={0}>เลือกห้องปฎิบัติการ</MenuItem>
                                 {LabRoom.map((item: LabRoomInterface) => (
@@ -302,6 +303,7 @@ export default function Body() {
                                 onChange={handleAddedTime}
                                 minDate={new Date("2018-01-01T00:00")}
                                 format="yyyy/MM/dd hh:mm a"
+                                fullWidth
                             />
                             </MuiPickersUtilsProvider>
                           </FormControl>
