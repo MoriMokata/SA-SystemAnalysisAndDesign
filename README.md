@@ -1,9 +1,9 @@
 # SaProject
-![alt text]([https://github.com/MoriMokata/SaProject/blob/main/ReadMe/signin.png](https://github.com/MoriMokata/SA-SystemAnalysisAndDesign/blob/main/ReadMe/Userstory.jpg))
+![alt text]((https://github.com/MoriMokata/SA-SystemAnalysisAndDesign/blob/main/ReadMe/Userstory.jpg))
 
-![alt text]([https://github.com/MoriMokata/SaProject/blob/main/ReadMe/signin.png](https://github.com/MoriMokata/SA-SystemAnalysisAndDesign/blob/main/ReadMe/Business%20and%20System.jpg))
+![alt text]((https://github.com/MoriMokata/SA-SystemAnalysisAndDesign/blob/main/ReadMe/Business%20and%20System.jpg))
 
-![alt text]([https://github.com/MoriMokata/SaProject/blob/main/ReadMe/signin.png](https://github.com/MoriMokata/SA-SystemAnalysisAndDesign/blob/main/ReadMe/All%20Business%20and%20System.jpg))
+![alt text]((https://github.com/MoriMokata/SA-SystemAnalysisAndDesign/blob/main/ReadMe/All%20Business%20and%20System.jpg))
 
 ![alt text](https://github.com/MoriMokata/SaProject/blob/main/ReadMe/signin.png)
 
