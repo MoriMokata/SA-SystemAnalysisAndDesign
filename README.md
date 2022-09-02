@@ -1,6 +1,6 @@
 # SaProject
 <p align="center">
-![alt text](https://github.com/MoriMokata/SA-SystemAnalysisAndDesign/blob/main/ReadMe/Userstory.jpg)
+   <img src="https://github.com/MoriMokata/SA-SystemAnalysisAndDesign/blob/main/ReadMe/Userstory.jpg"/>
 </p>
 <p align="center">
 ![alt text](https://github.com/MoriMokata/SA-SystemAnalysisAndDesign/blob/main/ReadMe/Business%20and%20System.jpg)
